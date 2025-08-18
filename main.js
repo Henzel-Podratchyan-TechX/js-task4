@@ -54,7 +54,7 @@ function formSubmit() {
 
     submitButton.addEventListener('click', () => {
         event.preventDefault();
-        let hasPassed = false;
+        let hasPassedName = false;
         if (name.value === "" || surname.value === "") {
             name.scrollIntoView({
                 behavior: 'smooth',
@@ -64,8 +64,9 @@ function formSubmit() {
             name.style.borderColor = '#F23A3C'
             surname.style.borderColor = '#F23A3C'
             nameSurnameRequired.style.display = 'unset'
-        } else hasPassed = true;
+        } else hasPassedName = true;
 
+        let hasPassedAddress = false;
         if (streetAddr.value === "" || city.value === "" || state.value === "" || postalCode.value === "") {
             streetAddr.scrollIntoView({
                 behavior: 'smooth',
@@ -77,9 +78,9 @@ function formSubmit() {
             state.style.borderColor = '#F23A3C'
             postalCode.style.borderColor = '#F23A3C'
             addressRequired.style.display = 'unset'
-            hasPassed = false
-        } else hasPassed = true;
+        } else hasPassedAddress = true;
 
+        let hasPassedPhone = false;
         if (phone.value === "") {
             phone.scrollIntoView({
                 behavior: 'smooth',
@@ -88,9 +89,9 @@ function formSubmit() {
             phoneSection.style.backgroundColor = '#FFEDED'
             phone.style.borderColor = '#F23A3C'
             phoneRequired.style.display = 'unset'
-            hasPassed = false
-        } else hasPassed = true;
+        } else hasPassedPhone = true;
 
+        let isEmailValid = false;
         if (!isValidEmail(email.value) && email.value !== "") {
             email.scrollIntoView({
                 behavior: 'smooth',
@@ -99,9 +100,9 @@ function formSubmit() {
             emailSection.style.backgroundColor = '#FFEDED'
             email.style.borderColor = '#F23A3C'
             emailValidation.style.display = 'unset'
-            hasPassed = false
-        } else hasPassed = true;
+        } else isEmailValid = true;
 
+        let hesSelectedAwareness = false;
         if (awareness.value === "Please Select") {
             awareness.scrollIntoView({
                 behavior: 'smooth',
@@ -110,7 +111,6 @@ function formSubmit() {
             awarenessSection.style.backgroundColor = '#FFEDED'
             awareness.style.borderColor = '#F23A3C'
             dropDownRequired.style.display = 'unset'
-            hasPassed = false
         } else if (awareness.value === "Other (Please specify...)") {
             awareness.scrollIntoView({
                 behavior: 'smooth',
@@ -120,8 +120,7 @@ function formSubmit() {
             awarenessOther.style.backgroundColor = '#FFEDED'
             awarenessOtherInput.style.borderColor = '#F23A3C'
             awarenessOtherRequired.style.display = 'unset'
-            hasPassed = false
-        } else hasPassed = true;
+        } else hesSelectedAwareness = true;
 
         const rows = document.querySelectorAll("table tbody tr");
 
@@ -134,7 +133,7 @@ function formSubmit() {
             };
         });
 
-        if (hasPassed) {
+        if (hasPassedAddress && hasPassedName && hasPassedPhone && isEmailValid && hesSelectedAwareness) {
             showAlertImage()
             console.log(data);
         }
